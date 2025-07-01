@@ -759,7 +759,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 /* Features Section */
 .features {
     padding: var(--space-3xl) 0;
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
     position: relative;
 }
 
@@ -948,7 +948,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 /* Amenities Section */
 .amenities {
     padding: var(--space-3xl) 0;
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
 }
 
 .amenities-content {
@@ -1148,7 +1148,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 /* Contact Section */
 .contact {
     padding: var(--space-3xl) 0;
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
 }
 
 .contact-content {
@@ -1303,7 +1303,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Footer */
 .footer {
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
 }
 
