@@ -1,17 +1,14 @@
 
-// Modern JavaScript for Chandy's Tall County Website
-
-// Initialize AOS (Animate On Scroll)
-document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out-cubic',
-        once: true,
-        offset: 100
-    });
+// Preloader
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    preloader.style.opacity = '0';
+    setTimeout(() => {
+        preloader.style.display = 'none';
+    }, 500);
 });
 
-// Navbar functionality
+// Navigation functionality
 class Navigation {
     constructor() {
         this.header = document.getElementById('header');
@@ -37,9 +34,11 @@ class Navigation {
             
             // Add/remove scrolled class
             if (scrollTop > 100) {
-                this.header.classList.add('scrolled');
+                this.header.style.background = 'rgba(15, 15, 15, 0.98)';
+                this.header.style.backdropFilter = 'blur(30px)';
             } else {
-                this.header.classList.remove('scrolled');
+                this.header.style.background = 'rgba(15, 15, 15, 0.95)';
+                this.header.style.backdropFilter = 'blur(20px)';
             }
             
             // Hide/show navbar on scroll
@@ -57,6 +56,18 @@ class Navigation {
         this.hamburger.addEventListener('click', () => {
             this.navMenu.classList.toggle('active');
             this.hamburger.classList.toggle('active');
+            
+            // Animate hamburger
+            const spans = this.hamburger.querySelectorAll('span');
+            if (this.hamburger.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
         
         // Close menu when clicking outside
@@ -64,6 +75,11 @@ class Navigation {
             if (!this.header.contains(e.target)) {
                 this.navMenu.classList.remove('active');
                 this.hamburger.classList.remove('active');
+                
+                const spans = this.hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             }
         });
     }
@@ -108,6 +124,11 @@ class Navigation {
                 // Close mobile menu
                 this.navMenu.classList.remove('active');
                 this.hamburger.classList.remove('active');
+                
+                const spans = this.hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             });
         });
     }
@@ -164,38 +185,6 @@ class ImageModal {
     }
 }
 
-// FAQ Accordion
-class FAQAccordion {
-    constructor() {
-        this.faqItems = document.querySelectorAll('.faq-item');
-        this.init();
-    }
-    
-    init() {
-        this.faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Close all other items
-                this.faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                
-                // Toggle current item
-                if (isActive) {
-                    item.classList.remove('active');
-                } else {
-                    item.classList.add('active');
-                }
-            });
-        });
-    }
-}
-
 // Contact Form
 class ContactForm {
     constructor() {
@@ -216,16 +205,17 @@ class ContactForm {
         const name = formData.get('name');
         const email = formData.get('email');
         const phone = formData.get('phone');
+        const interest = formData.get('interest');
         const message = formData.get('message');
         
         // Basic validation
         if (!name || !email || !phone || !message) {
-            this.showNotification('Please fill in all fields.', 'error');
+            this.showNotification('Please fill in all required fields.', 'error');
             return;
         }
         
         // Create WhatsApp message
-        const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
+        const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AInterest: ${interest}%0AMessage: ${message}`;
         const whatsappUrl = `https://api.whatsapp.com/send?phone=+15612719502&text=${whatsappMessage}`;
         
         // Open WhatsApp
@@ -255,7 +245,9 @@ class ContactForm {
             z-index: 10000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
-            ${type === 'success' ? 'background: #10b981;' : 'background: #ef4444;'}
+            font-family: var(--font-primary);
+            ${type === 'success' ? 'background: linear-gradient(135deg, #10b981, #059669);' : 'background: linear-gradient(135deg, #ef4444, #dc2626);'}
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         `;
         
         document.body.appendChild(notification);
@@ -280,7 +272,7 @@ class ContactForm {
 // Scroll animations
 class ScrollAnimations {
     constructor() {
-        this.elements = document.querySelectorAll('[data-scroll]');
+        this.elements = document.querySelectorAll('.feature-card, .amenity-card, .gallery-item, .contact-card, .info-item');
         this.init();
     }
     
@@ -297,12 +289,18 @@ class ScrollAnimations {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, options);
         
-        this.elements.forEach(el => observer.observe(el));
+        this.elements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
     }
 }
 
@@ -317,63 +315,58 @@ class ParallaxEffect {
         if (this.hero && window.innerWidth > 768) {
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
-                const parallax = scrolled * 0.3;
+                const parallax = scrolled * 0.2;
                 
-                this.hero.style.transform = `translateY(${parallax}px)`;
+                const heroVideo = this.hero.querySelector('.hero-video');
+                if (heroVideo) {
+                    heroVideo.style.transform = `translateY(${parallax}px)`;
+                }
             });
         }
     }
 }
 
-// Counter animation
-class CounterAnimation {
+// Enhanced hover effects
+class HoverEffects {
     constructor() {
-        this.counters = document.querySelectorAll('[data-counter]');
         this.init();
     }
     
     init() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animateCounter(entry.target);
-                    observer.unobserve(entry.target);
-                }
+        // Card hover effects
+        const cards = document.querySelectorAll('.feature-card, .amenity-card, .contact-card, .info-item');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
             });
         });
         
-        this.counters.forEach(counter => observer.observe(counter));
-    }
-    
-    animateCounter(element) {
-        const target = parseInt(element.getAttribute('data-counter'));
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += step;
-            element.textContent = Math.floor(current);
+        // Button hover effects
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
             
-            if (current >= target) {
-                element.textContent = target;
-                clearInterval(timer);
-            }
-        }, 16);
-    }
-}
-
-// Smooth reveal on page load
-class PageLoader {
-    constructor() {
-        this.init();
-    }
-    
-    init() {
-        document.body.style.opacity = '0';
-        window.addEventListener('load', () => {
-            document.body.style.transition = 'opacity 0.5s ease';
-            document.body.style.opacity = '1';
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Gallery item effects
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
     }
 }
@@ -385,39 +378,78 @@ function openModal(imageSrc) {
     }
 }
 
+// Page loading effect
+class PageLoader {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        // Add smooth reveal on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            
+            // Animate elements in sequence
+            const elements = document.querySelectorAll('.hero-info > *');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    }
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize components
     const navigation = new Navigation();
     window.imageModal = new ImageModal();
-    const faqAccordion = new FAQAccordion();
     const contactForm = new ContactForm();
     const scrollAnimations = new ScrollAnimations();
     const parallax = new ParallaxEffect();
-    const counters = new CounterAnimation();
+    const hoverEffects = new HoverEffects();
     const pageLoader = new PageLoader();
     
-    // Smooth hover effects for cards
-    const cards = document.querySelectorAll('.about-card, .gallery-item, .amenity-item');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
+    // Form enhancements
+    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
+    formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
         });
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
         });
+        
+        // Check if input has value on load
+        if (input.value) {
+            input.parentElement.classList.add('focused');
+        }
     });
     
-    // Add subtle animations to buttons
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+    // Smooth scroll for all anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 });
@@ -454,35 +486,44 @@ if ('IntersectionObserver' in window) {
     lazyImages.forEach(img => imageObserver.observe(img));
 }
 
-// Modern browser feature detection
-const supportsWebP = () => {
-    const canvas = document.createElement('canvas');
-    return canvas.toDataURL('image/webp').indexOf('webp') > -1;
-};
+// Add custom cursor effect for interactive elements
+document.addEventListener('mousemove', (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    if (cursor) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    }
+});
 
-// Add scroll-based reveal animations
-const addScrollReveal = () => {
-    const elements = document.querySelectorAll('.about-card, .amenity-item, .gallery-item, .contact-item');
+// Handle form validation
+const validateForm = (form) => {
+    const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+    let isValid = true;
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            input.style.borderColor = '#ef4444';
+            isValid = false;
+        } else {
+            input.style.borderColor = '#333333';
+        }
     });
     
-    elements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+    return isValid;
 };
 
-// Initialize scroll reveal animations
-document.addEventListener('DOMContentLoaded', addScrollReveal);
+// Add loading states
+const addLoadingState = (button) => {
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }, 2000);
+};
+
+// Initialize theme
+document.documentElement.style.setProperty('--primary-color', '#c9a961');
+document.documentElement.style.setProperty('--dark-bg', '#0f0f0f');
