@@ -36,10 +36,10 @@ class Navigation {
             
             // Add/remove scrolled class
             if (scrollTop > 100) {
-                this.header.style.background = 'rgba(10, 10, 10, 0.98)';
+                this.header.style.background = 'rgba(255, 255, 255, 0.98)';
                 this.header.style.backdropFilter = 'blur(30px)';
             } else {
-                this.header.style.background = 'rgba(10, 10, 10, 0.95)';
+                this.header.style.background = 'rgba(255, 255, 255, 0.95)';
                 this.header.style.backdropFilter = 'blur(20px)';
             }
             
