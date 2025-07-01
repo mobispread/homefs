@@ -491,7 +491,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Video Section */
 .video-section {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
 
@@ -645,7 +645,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* About Section */
 .about {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
 
@@ -758,7 +758,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Features Section */
 .features {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
     position: relative;
 }
@@ -843,7 +843,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Floor Plan Section */
 .floor-plan {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
 
@@ -947,7 +947,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Amenities Section */
 .amenities {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
 
@@ -1031,7 +1031,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Gallery Section */
 .gallery {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
 
@@ -1164,7 +1164,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 /* Contact Section */
 .contact {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-xl) 0;
     background: var(--bg-secondary);
 }
 
@@ -1325,7 +1325,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 }
 
 .footer-main {
-    padding: var(--space-3xl) 0 var(--space-lg);
+    padding: var(--space-xl) 0 var(--space-lg);
 }
 
 .footer-content {
