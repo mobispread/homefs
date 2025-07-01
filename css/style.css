@@ -16,24 +16,24 @@
     --secondary-color: #2c3e50;
     --accent-color: #e74c3c;
     
-    /* Dark Theme Colors */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #111111;
-    --bg-tertiary: #1a1a1a;
-    --bg-card: #1e1e1e;
-    --bg-overlay: rgba(0, 0, 0, 0.85);
+    /* Light Theme Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #f1f3f4;
+    --bg-card: #ffffff;
+    --bg-overlay: rgba(255, 255, 255, 0.95);
     
     /* Text Colors */
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --text-muted: #888888;
-    --text-light: #666666;
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --text-muted: #8c8c8c;
+    --text-light: #adb5bd;
     
     /* Border and Effects */
-    --border-color: #333333;
-    --border-light: #444444;
-    --shadow-dark: rgba(0, 0, 0, 0.5);
-    --shadow-gold: rgba(184, 134, 11, 0.3);
+    --border-color: #e9ecef;
+    --border-light: #dee2e6;
+    --shadow-dark: rgba(0, 0, 0, 0.1);
+    --shadow-gold: rgba(184, 134, 11, 0.2);
     
     /* Typography */
     --font-primary: 'Poppins', sans-serif;
@@ -147,7 +147,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: var(--bg-primary);
+    color: #ffffff;
     box-shadow: 0 4px 15px var(--shadow-gold);
 }
 
@@ -164,7 +164,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 .btn-outline:hover {
     background: var(--primary-color);
-    color: var(--bg-primary);
+    color: #ffffff;
 }
 
 .btn-full {
@@ -177,9 +177,10 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: all var(--transition-normal);
     padding: var(--space-md) 0;
@@ -337,8 +338,8 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(10, 10, 10, 0.8) 0%, 
-        rgba(10, 10, 10, 0.6) 50%, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
         rgba(184, 134, 11, 0.3) 100%
     ), url('../images/chandys-image.jpg');
     background-size: cover;
@@ -353,7 +354,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.7) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
     z-index: 2;
 }
 
@@ -412,7 +413,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     align-items: center;
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-md);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(184, 134, 11, 0.1);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     backdrop-filter: blur(10px);
@@ -437,10 +438,11 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 .stat-item {
     text-align: center;
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(184, 134, 11, 0.05);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .stat-number {
@@ -1591,7 +1593,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
         background: var(--bg-primary);
         flex-direction: column;
         padding: var(--space-lg);
-        box-shadow: 0 10px 40px var(--shadow-dark);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         transform: translateY(-100%);
         transition: transform var(--transition-normal);
         opacity: 0;
