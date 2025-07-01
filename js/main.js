@@ -395,8 +395,13 @@ class ContactForm {
         submitBtn.disabled = true;
         
         // Create WhatsApp message
-        const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AInterest: ${interest}%0AMessage: ${message}`;
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=+15612719502&text=${whatsappMessage}`;
+        const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Message: ${message}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=15612719502&text=${encodeURIComponent(whatsappMessage)}`;
         
         // Simulate sending delay
         setTimeout(() => {
