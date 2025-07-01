@@ -326,14 +326,23 @@ class ParallaxEffect {
     }
 }
 
-// Enhanced hover effects
+// Enhanced hover effects with mobile support
 class HoverEffects {
     constructor() {
+        this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         this.init();
     }
     
     init() {
-        // Card hover effects
+        if (!this.isTouchDevice) {
+            this.setupHoverEffects();
+        } else {
+            this.setupTouchEffects();
+        }
+    }
+    
+    setupHoverEffects() {
+        // Card hover effects for non-touch devices
         const cards = document.querySelectorAll('.feature-card, .amenity-card, .contact-card, .info-item');
         cards.forEach(card => {
             card.addEventListener('mouseenter', function() {
@@ -368,6 +377,52 @@ class HoverEffects {
                 this.style.transform = 'translateY(0)';
             });
         });
+    }
+    
+    setupTouchEffects() {
+        // Touch-friendly effects for mobile devices
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+            
+            button.addEventListener('touchcancel', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Gallery items always show overlay on touch devices
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            const overlay = item.querySelector('.gallery-overlay');
+            if (overlay) {
+                overlay.style.transform = 'translateY(0)';
+                overlay.style.opacity = '0.9';
+            }
+        });
+        
+        // Plan overlay always visible on touch devices
+        const planImage = document.querySelector('.plan-image');
+        if (planImage) {
+            const planOverlay = planImage.querySelector('.plan-overlay');
+            if (planOverlay) {
+                planOverlay.style.opacity = '1';
+            }
+        }
+        
+        // About image overlay always visible on touch devices
+        const aboutImage = document.querySelector('.about-image');
+        if (aboutImage) {
+            const imageOverlay = aboutImage.querySelector('.image-overlay');
+            if (imageOverlay) {
+                imageOverlay.style.opacity = '1';
+            }
+        }
     }
 }
 
@@ -405,8 +460,139 @@ class PageLoader {
     }
 }
 
+// Mobile viewport handler
+class MobileViewport {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        // Set viewport meta tag for proper mobile scaling
+        this.setViewport();
+        
+        // Handle orientation changes
+        this.handleOrientationChange();
+        
+        // Prevent zoom on double tap for specific elements
+        this.preventDoubleTabZoom();
+        
+        // Handle safe area for devices with notches
+        this.handleSafeArea();
+    }
+    
+    setViewport() {
+        let viewport = document.querySelector('meta[name="viewport"]');
+        if (!viewport) {
+            viewport = document.createElement('meta');
+            viewport.name = 'viewport';
+            document.head.appendChild(viewport);
+        }
+        viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes';
+    }
+    
+    handleOrientationChange() {
+        window.addEventListener('orientationchange', () => {
+            // Delay to allow the orientation change to complete
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                
+                // Recalculate hero height if needed
+                const hero = document.querySelector('.hero');
+                if (hero && window.innerHeight < 500) {
+                    hero.style.minHeight = '100vh';
+                }
+            }, 100);
+        });
+    }
+    
+    preventDoubleTabZoom() {
+        const elements = document.querySelectorAll('.btn, .nav-link, .gallery-btn');
+        elements.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                element.click();
+            });
+        });
+    }
+    
+    handleSafeArea() {
+        // Add CSS custom properties for safe area
+        const root = document.documentElement;
+        root.style.setProperty('--safe-area-inset-top', 'env(safe-area-inset-top)');
+        root.style.setProperty('--safe-area-inset-bottom', 'env(safe-area-inset-bottom)');
+        root.style.setProperty('--safe-area-inset-left', 'env(safe-area-inset-left)');
+        root.style.setProperty('--safe-area-inset-right', 'env(safe-area-inset-right)');
+    }
+}
+
+// Touch gesture handler
+class TouchHandler {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        // Improve scroll performance on mobile
+        this.optimizeScrolling();
+        
+        // Handle touch gestures for gallery
+        this.setupGalleryGestures();
+        
+        // Improve tap performance
+        this.optimizeTapping();
+    }
+    
+    optimizeScrolling() {
+        // Use passive event listeners for better performance
+        document.addEventListener('touchstart', () => {}, { passive: true });
+        document.addEventListener('touchmove', () => {}, { passive: true });
+        
+        // Prevent overscroll on body
+        document.body.addEventListener('touchmove', (e) => {
+            if (e.target === document.body) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
+    
+    setupGalleryGestures() {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            let touchStartTime = 0;
+            
+            item.addEventListener('touchstart', (e) => {
+                touchStartTime = Date.now();
+            });
+            
+            item.addEventListener('touchend', (e) => {
+                const touchDuration = Date.now() - touchStartTime;
+                
+                // If touch duration is less than 200ms, treat as tap
+                if (touchDuration < 200) {
+                    const img = item.querySelector('img');
+                    if (img && window.imageModal) {
+                        window.imageModal.open(img.src);
+                    }
+                }
+            });
+        });
+    }
+    
+    optimizeTapping() {
+        // Remove 300ms tap delay on mobile
+        const fastClickElements = document.querySelectorAll('.btn, .nav-link, .gallery-btn, .whatsapp-btn');
+        fastClickElements.forEach(element => {
+            element.style.touchAction = 'manipulation';
+        });
+    }
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize mobile-specific components first
+    const mobileViewport = new MobileViewport();
+    const touchHandler = new TouchHandler();
+    
     // Initialize components
     const navigation = new Navigation();
     window.imageModal = new ImageModal();
