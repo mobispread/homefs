@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,7 +20,9 @@
 <body>
     <!-- Preloader -->
     <div id="preloader">
-        <div class="loader"></div>
+        <div class="loader">
+            <div class="spinner"></div>
+        </div>
     </div>
 
     <!-- Header -->
@@ -29,7 +31,10 @@
             <nav class="navbar">
                 <div class="nav-brand">
                     <img src="images/flat.png" alt="Logo" class="logo">
-                    <span class="brand-text">Chandy's Tall County</span>
+                    <div class="brand-info">
+                        <span class="brand-text">Chandy's Tall County</span>
+                        <span class="brand-subtitle">Luxury Living</span>
+                    </div>
                 </div>
                 
                 <ul class="nav-menu" id="nav-menu">
@@ -43,9 +48,12 @@
                 </ul>
                 
                 <div class="nav-actions">
+                    <div class="contact-info">
+                        <span class="contact-text">Call Us Now</span>
+                        <a href="tel:+15612719502" class="contact-number">+1 561 271 9502</a>
+                    </div>
                     <a href="https://api.whatsapp.com/send?phone=+15612719502" class="whatsapp-btn" target="_blank">
                         <i class="fab fa-whatsapp"></i>
-                        <span>Contact</span>
                     </a>
                     <div class="hamburger" id="hamburger">
                         <span></span>
@@ -59,106 +67,121 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-video">
-            <iframe src="https://www.youtube.com/embed/xNsP0hYNaBY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=xNsP0hYNaBY" frameborder="0" allowfullscreen></iframe>
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-bg">
+                    <iframe src="https://www.youtube.com/embed/xNsP0hYNaBY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=xNsP0hYNaBY" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="hero-overlay"></div>
+            </div>
         </div>
-        <div class="hero-overlay"></div>
         
         <div class="hero-content">
             <div class="container">
-                <div class="hero-info">
-                    <div class="property-badge">Premium Property</div>
-                    <h1 class="hero-title">Chandy's Tall County</h1>
-                    <p class="hero-subtitle">Brand New Super Luxury Apartment</p>
-                    <div class="hero-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Kanjikuzhi, Kottayam, Kerala</span>
-                    </div>
-                    
-                    <div class="property-details">
-                        <div class="detail-item">
-                            <div class="detail-icon"><i class="fas fa-bed"></i></div>
-                            <div class="detail-info">
-                                <span class="detail-number">2</span>
-                                <span class="detail-label">Bedrooms</span>
+                <div class="hero-inner">
+                    <div class="hero-text">
+                        <span class="hero-subtitle">Premium Luxury Apartment</span>
+                        <h1 class="hero-title">Chandy's Tall County</h1>
+                        <p class="hero-description">Experience the pinnacle of luxury living in Kottayam's most prestigious residential complex with world-class amenities and stunning views.</p>
+                        
+                        <div class="hero-features">
+                            <div class="feature-badge">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kanjikuzhi, Kottayam</span>
+                            </div>
+                            <div class="feature-badge">
+                                <i class="fas fa-bed"></i>
+                                <span>2 Bedrooms</span>
+                            </div>
+                            <div class="feature-badge">
+                                <i class="fas fa-expand"></i>
+                                <span>1425 Sq Ft</span>
+                            </div>
+                            <div class="feature-badge">
+                                <i class="fas fa-building"></i>
+                                <span>18th Floor</span>
                             </div>
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-icon"><i class="fas fa-bath"></i></div>
-                            <div class="detail-info">
-                                <span class="detail-number">2</span>
-                                <span class="detail-label">Bathrooms</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon"><i class="fas fa-expand"></i></div>
-                            <div class="detail-info">
-                                <span class="detail-number">1425</span>
-                                <span class="detail-label">Sq Ft</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon"><i class="fas fa-car"></i></div>
-                            <div class="detail-info">
-                                <span class="detail-number">1</span>
-                                <span class="detail-label">Parking</span>
-                            </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="#gallery" class="btn btn-outline">
+                                <i class="fas fa-play"></i>
+                                <span>Virtual Tour</span>
+                            </a>
                         </div>
                     </div>
                     
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">
-                            <span>View Details</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <a href="#gallery" class="btn btn-outline">
-                            <span>Take Tour</span>
-                            <i class="fas fa-play"></i>
-                        </a>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">₹85L</div>
+                            <div class="stat-label">Starting Price</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1425</div>
+                            <div class="stat-label">Sq Ft Area</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">18th</div>
+                            <div class="stat-label">Floor Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2024</div>
+                            <div class="stat-label">Ready to Move</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll Down</span>
+        </div>
     </section>
 
-    <!-- Property Info Bar -->
-    <section class="property-info-bar">
+    <!-- Quick Info Bar -->
+    <section class="quick-info">
         <div class="container">
             <div class="info-grid">
-                <div class="info-item">
+                <div class="info-card">
                     <div class="info-icon">
-                        <i class="fas fa-building"></i>
+                        <i class="fas fa-home"></i>
                     </div>
                     <div class="info-content">
-                        <h4>Floor</h4>
-                        <p>18th Floor</p>
+                        <h4>Property Type</h4>
+                        <p>Luxury Apartment</p>
                     </div>
                 </div>
-                <div class="info-item">
+                <div class="info-card">
                     <div class="info-icon">
-                        <i class="fas fa-calendar"></i>
+                        <i class="fas fa-calendar-check"></i>
                     </div>
                     <div class="info-content">
-                        <h4>Status</h4>
+                        <h4>Availability</h4>
                         <p>Ready to Move</p>
                     </div>
                 </div>
-                <div class="info-item">
+                <div class="info-card">
                     <div class="info-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="info-content">
                         <h4>Security</h4>
-                        <p>24/7 Security</p>
+                        <p>24/7 Secured</p>
                     </div>
                 </div>
-                <div class="info-item">
+                <div class="info-card">
                     <div class="info-icon">
-                        <i class="fas fa-swimming-pool"></i>
+                        <i class="fas fa-car"></i>
                     </div>
                     <div class="info-content">
-                        <h4>Amenities</h4>
-                        <p>World Class</p>
+                        <h4>Parking</h4>
+                        <p>Covered Parking</p>
                     </div>
                 </div>
             </div>
@@ -169,43 +192,59 @@
     <section class="about" id="about">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">About Property</span>
-                <h2 class="section-title">Discover Luxury Living</h2>
-                <p class="section-description">Experience the pinnacle of luxury living in Kottayam's most prestigious residential complex.</p>
+                <span class="section-subtitle">About Property</span>
+                <h2 class="section-title">Discover Luxury Living at Its Finest</h2>
             </div>
             
             <div class="about-content">
                 <div class="about-text">
-                    <div class="highlight-box">
-                        <h3>Premium Location</h3>
-                        <p>Located in the heart of Kanjikuzhi, Kottayam, Chandy's Tall County offers unparalleled connectivity and prestige. The strategic location provides easy access to major landmarks, educational institutions, and commercial centers.</p>
-                    </div>
-                    
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Prime location in Kottayam</span>
+                    <div class="text-content">
+                        <h3>Experience Premium Lifestyle</h3>
+                        <p>Chandy's Tall County represents the epitome of luxury living in Kottayam. Located in the prestigious Kanjikuzhi area, this architectural marvel offers an unparalleled living experience with world-class amenities and stunning city views.</p>
+                        
+                        <p>Every detail has been meticulously planned to provide residents with the ultimate comfort and convenience. From the elegant interiors to the comprehensive amenities, everything reflects our commitment to excellence.</p>
+                        
+                        <div class="highlight-features">
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Prime location in Kottayam's heart</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>International standard construction</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>24/7 security and power backup</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>World-class amenities included</span>
+                            </div>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>International standard amenities</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>24/7 security and surveillance</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Ready to move luxury apartment</span>
-                        </div>
+                        
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <div class="about-image">
-                    <img src="images/chandys-image.jpg" alt="Building View">
-                    <div class="image-overlay">
-                        <div class="play-button" onclick="openModal('images/chandys-image.jpg')">
-                            <i class="fas fa-play"></i>
+                <div class="about-media">
+                    <div class="media-grid">
+                        <div class="media-item large">
+                            <img src="images/chandys-image.jpg" alt="Building Exterior">
+                            <div class="media-overlay">
+                                <button class="play-btn" onclick="openModal('images/chandys-image.jpg')">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <img src="images/hall.jpg" alt="Interior View">
+                        </div>
+                        <div class="media-item">
+                            <img src="images/bedroom.jpg" alt="Bedroom">
                         </div>
                     </div>
                 </div>
@@ -215,43 +254,61 @@
 
     <!-- Features Section -->
     <section class="features" id="features">
+        <div class="features-bg"></div>
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Key Features</span>
+                <span class="section-subtitle">Key Features</span>
                 <h2 class="section-title">Why Choose Chandy's Tall County</h2>
+                <p class="section-description">Discover what makes our property the perfect choice for luxury living</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="card-icon">
+                    <div class="feature-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3>Strategic Location</h3>
-                    <p>Prime location in Kanjikuzhi with excellent connectivity to major city centers and landmarks.</p>
+                    <h4>Prime Location</h4>
+                    <p>Strategically located in Kanjikuzhi with excellent connectivity to major city centers and landmarks.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="card-icon">
-                        <i class="fas fa-tools"></i>
+                    <div class="feature-icon">
+                        <i class="fas fa-building"></i>
                     </div>
-                    <h3>Premium Construction</h3>
-                    <p>Built with the finest materials and modern construction techniques for lasting quality.</p>
+                    <h4>Premium Construction</h4>
+                    <p>Built with the finest materials and modern construction techniques ensuring lasting quality and durability.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="card-icon">
+                    <div class="feature-icon">
                         <i class="fas fa-swimming-pool"></i>
                     </div>
-                    <h3>World-Class Amenities</h3>
-                    <p>International standard facilities including swimming pool, gym, and recreational areas.</p>
+                    <h4>World-Class Amenities</h4>
+                    <p>International standard facilities including swimming pool, gymnasium, and recreational areas.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="card-icon">
+                    <div class="feature-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <h3>Green Environment</h3>
+                    <h4>Green Environment</h4>
                     <p>Surrounded by lush greenery providing a pollution-free and serene living environment.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>24/7 Security</h4>
+                    <p>Round-the-clock security with advanced CCTV surveillance ensuring complete safety and peace of mind.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h4>Dedicated Parking</h4>
+                    <p>Covered parking spaces with easy access and additional visitor parking facilities.</p>
                 </div>
             </div>
         </div>
@@ -262,51 +319,60 @@
         <div class="container">
             <div class="floor-plan-content">
                 <div class="plan-info">
-                    <span class="section-tag">Floor Plan</span>
-                    <h2 class="section-title">Thoughtfully Designed Layout</h2>
-                    <p>Every detail has been carefully planned to maximize space utilization and natural light.</p>
+                    <div class="section-header">
+                        <span class="section-subtitle">Floor Plan</span>
+                        <h2 class="section-title">Thoughtfully Designed Layout</h2>
+                        <p class="section-description">Every square foot has been carefully planned to maximize space utilization, natural light, and ventilation.</p>
+                    </div>
                     
-                    <div class="plan-specifications">
-                        <div class="spec-row">
-                            <div class="spec-item">
-                                <span class="spec-label">Total Area:</span>
-                                <span class="spec-value">1425 Sq Ft</span>
+                    <div class="plan-details">
+                        <div class="detail-row">
+                            <div class="detail-item">
+                                <span class="detail-label">Total Area</span>
+                                <span class="detail-value">1425 Sq Ft</span>
                             </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Floor:</span>
-                                <span class="spec-value">18th Floor</span>
-                            </div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-item">
-                                <span class="spec-label">Bedrooms:</span>
-                                <span class="spec-value">2 (AC Ready)</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Bathrooms:</span>
-                                <span class="spec-value">2 Attached</span>
+                            <div class="detail-item">
+                                <span class="detail-label">Floor Level</span>
+                                <span class="detail-value">18th Floor</span>
                             </div>
                         </div>
-                        <div class="spec-row">
-                            <div class="spec-item">
-                                <span class="spec-label">Kitchen:</span>
-                                <span class="spec-value">Modular</span>
+                        <div class="detail-row">
+                            <div class="detail-item">
+                                <span class="detail-label">Bedrooms</span>
+                                <span class="detail-value">2 (AC Ready)</span>
                             </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Balconies:</span>
-                                <span class="spec-value">2</span>
+                            <div class="detail-item">
+                                <span class="detail-label">Bathrooms</span>
+                                <span class="detail-value">2 Attached</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-item">
+                                <span class="detail-label">Kitchen</span>
+                                <span class="detail-value">Modular</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Balconies</span>
+                                <span class="detail-value">2 Large</span>
                             </div>
                         </div>
                     </div>
+                    
+                    <a href="#contact" class="btn btn-outline">
+                        <span>Download Brochure</span>
+                        <i class="fas fa-download"></i>
+                    </a>
                 </div>
                 
-                <div class="plan-image">
-                    <img src="images/1425-plan.jpg" alt="Floor Plan">
-                    <div class="plan-overlay">
-                        <button class="view-plan-btn" onclick="openModal('images/1425-plan.jpg')">
-                            <i class="fas fa-expand"></i>
-                            <span>View Full Plan</span>
-                        </button>
+                <div class="plan-visual">
+                    <div class="plan-image">
+                        <img src="images/1425-plan.jpg" alt="Floor Plan">
+                        <div class="plan-overlay">
+                            <button class="zoom-btn" onclick="openModal('images/1425-plan.jpg')">
+                                <i class="fas fa-expand"></i>
+                                <span>View Full Plan</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -315,61 +381,78 @@
 
     <!-- Amenities Section -->
     <section class="amenities" id="amenities">
-        <div class="amenities-bg"></div>
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Amenities</span>
+                <span class="section-subtitle">Amenities</span>
                 <h2 class="section-title">World-Class Facilities</h2>
-                <p class="section-description">Experience luxury living with our comprehensive range of premium amenities.</p>
+                <p class="section-description">Experience luxury living with our comprehensive range of premium amenities designed for your comfort and convenience.</p>
             </div>
             
-            <div class="amenities-grid">
-                <div class="amenity-card">
-                    <div class="amenity-icon">
-                        <i class="fas fa-swimming-pool"></i>
+            <div class="amenities-content">
+                <div class="amenities-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-swimming-pool"></i>
+                        </div>
+                        <h4>Swimming Pool</h4>
+                        <p>International standard swimming pool (25m × 10.02m) with poolside amenities</p>
                     </div>
-                    <h4>Swimming Pool</h4>
-                    <p>International standard swimming pool (25m × 10.02m)</p>
-                </div>
-                
-                <div class="amenity-card">
-                    <div class="amenity-icon">
-                        <i class="fas fa-dumbbell"></i>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h4>Fitness Center</h4>
+                        <p>Fully equipped modern gymnasium with latest fitness equipment and trainer support</p>
                     </div>
-                    <h4>Health Club</h4>
-                    <p>Fully equipped modern gymnasium and fitness center</p>
-                </div>
-                
-                <div class="amenity-card">
-                    <div class="amenity-icon">
-                        <i class="fas fa-users"></i>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Banquet Hall</h4>
+                        <p>Spacious banquet hall with capacity for 500 guests and professional catering services</p>
                     </div>
-                    <h4>Banquet Hall</h4>
-                    <p>Spacious banquet hall with capacity for 500 guests</p>
-                </div>
-                
-                <div class="amenity-card">
-                    <div class="amenity-icon">
-                        <i class="fas fa-gamepad"></i>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h4>Recreation Zone</h4>
+                        <p>Indoor games, sports courts, children's play area and entertainment facilities</p>
                     </div>
-                    <h4>Recreation</h4>
-                    <p>Indoor games, sports courts and recreation areas</p>
-                </div>
-                
-                <div class="amenity-card">
-                    <div class="amenity-icon">
-                        <i class="fas fa-shield-alt"></i>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Security System</h4>
+                        <p>24×7 security with CCTV surveillance, intercom and electronic access control</p>
                     </div>
-                    <h4>Security</h4>
-                    <p>24×7 security with CCTV surveillance system</p>
-                </div>
-                
-                <div class="amenity-card">
-                    <div class="amenity-icon">
-                        <i class="fas fa-bolt"></i>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Power Backup</h4>
+                        <p>Individual generator backup for each apartment ensuring uninterrupted power supply</p>
                     </div>
-                    <h4>Power Backup</h4>
-                    <p>Individual generator backup for each apartment</p>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h4>Parking Space</h4>
+                        <p>Dedicated covered parking with additional visitor parking and valet services</p>
+                    </div>
+                    
+                    <div class="amenity-item">
+                        <div class="amenity-icon">
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                        <h4>Concierge Service</h4>
+                        <p>Professional concierge services for all your daily needs and convenience</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -379,69 +462,102 @@
     <section class="gallery" id="gallery">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Gallery</span>
+                <span class="section-subtitle">Gallery</span>
                 <h2 class="section-title">Property Showcase</h2>
-                <p class="section-description">Explore the beautiful interiors and premium finishes of your future home.</p>
+                <p class="section-description">Explore the beautiful interiors, premium finishes, and stunning views of your future home.</p>
             </div>
             
-            <div class="gallery-grid">
-                <div class="gallery-item large">
-                    <img src="images/main-entrance.jpg" alt="Main Entrance">
-                    <div class="gallery-overlay">
-                        <h3>Main Entrance</h3>
-                        <button class="gallery-btn" onclick="openModal('images/main-entrance.jpg')">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                    </div>
+            <div class="gallery-content">
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="exterior">Exterior</button>
+                    <button class="filter-btn" data-filter="interior">Interior</button>
+                    <button class="filter-btn" data-filter="amenities">Amenities</button>
                 </div>
                 
-                <div class="gallery-item">
-                    <img src="images/hall.jpg" alt="Living Area">
-                    <div class="gallery-overlay">
-                        <h3>Living Area</h3>
-                        <button class="gallery-btn" onclick="openModal('images/hall.jpg')">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="exterior">
+                        <div class="gallery-image">
+                            <img src="images/main-entrance.jpg" alt="Main Entrance">
+                            <div class="gallery-overlay">
+                                <div class="gallery-content">
+                                    <h4>Main Entrance</h4>
+                                    <button class="view-btn" onclick="openModal('images/main-entrance.jpg')">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/bedroom.jpg" alt="Master Bedroom">
-                    <div class="gallery-overlay">
-                        <h3>Master Bedroom</h3>
-                        <button class="gallery-btn" onclick="openModal('images/bedroom.jpg')">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
+                    
+                    <div class="gallery-item" data-category="interior">
+                        <div class="gallery-image">
+                            <img src="images/hall.jpg" alt="Living Room">
+                            <div class="gallery-overlay">
+                                <div class="gallery-content">
+                                    <h4>Living Room</h4>
+                                    <button class="view-btn" onclick="openModal('images/hall.jpg')">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/kitchen.jpg" alt="Kitchen">
-                    <div class="gallery-overlay">
-                        <h3>Modern Kitchen</h3>
-                        <button class="gallery-btn" onclick="openModal('images/kitchen.jpg')">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
+                    
+                    <div class="gallery-item" data-category="interior">
+                        <div class="gallery-image">
+                            <img src="images/bedroom.jpg" alt="Master Bedroom">
+                            <div class="gallery-overlay">
+                                <div class="gallery-content">
+                                    <h4>Master Bedroom</h4>
+                                    <button class="view-btn" onclick="openModal('images/bedroom.jpg')">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/bathroom0.jpg" alt="Bathroom">
-                    <div class="gallery-overlay">
-                        <h3>Bathroom</h3>
-                        <button class="gallery-btn" onclick="openModal('images/bathroom0.jpg')">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
+                    
+                    <div class="gallery-item" data-category="interior">
+                        <div class="gallery-image">
+                            <img src="images/kitchen.jpg" alt="Kitchen">
+                            <div class="gallery-overlay">
+                                <div class="gallery-content">
+                                    <h4>Modern Kitchen</h4>
+                                    <button class="view-btn" onclick="openModal('images/kitchen.jpg')">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/bedroom2.jpg" alt="Second Bedroom">
-                    <div class="gallery-overlay">
-                        <h3>Second Bedroom</h3>
-                        <button class="gallery-btn" onclick="openModal('images/bedroom2.jpg')">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
+                    
+                    <div class="gallery-item" data-category="interior">
+                        <div class="gallery-image">
+                            <img src="images/bathroom0.jpg" alt="Bathroom">
+                            <div class="gallery-overlay">
+                                <div class="gallery-content">
+                                    <h4>Premium Bathroom</h4>
+                                    <button class="view-btn" onclick="openModal('images/bathroom0.jpg')">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="interior">
+                        <div class="gallery-image">
+                            <img src="images/bedroom2.jpg" alt="Second Bedroom">
+                            <div class="gallery-overlay">
+                                <div class="gallery-content">
+                                    <h4>Second Bedroom</h4>
+                                    <button class="view-btn" onclick="openModal('images/bedroom2.jpg')">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -450,12 +566,11 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="contact-bg"></div>
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Get In Touch</span>
+                <span class="section-subtitle">Get In Touch</span>
                 <h2 class="section-title">Contact Us Today</h2>
-                <p class="section-description">Ready to make Chandy's Tall County your new home? Let's discuss your requirements.</p>
+                <p class="section-description">Ready to make Chandy's Tall County your new home? Get in touch with our expert team for more information.</p>
             </div>
             
             <div class="contact-content">
@@ -465,8 +580,9 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div class="contact-details">
-                            <h4>Phone</h4>
-                            <p><a href="tel:+15612719502">+1 561 271 9502</a></p>
+                            <h4>Phone Number</h4>
+                            <a href="tel:+15612719502">+1 561 271 9502</a>
+                            <span>Available 24/7</span>
                         </div>
                     </div>
                     
@@ -475,8 +591,9 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-details">
-                            <h4>Email</h4>
-                            <p><a href="mailto:contact@homeforsalekottayam.com">contact@homeforsalekottayam.com</a></p>
+                            <h4>Email Address</h4>
+                            <a href="mailto:contact@homeforsalekottayam.com">contact@homeforsalekottayam.com</a>
+                            <span>Quick Response</span>
                         </div>
                     </div>
                     
@@ -486,106 +603,158 @@
                         </div>
                         <div class="contact-details">
                             <h4>WhatsApp</h4>
-                            <p><a href="https://api.whatsapp.com/send?phone=+15612719502" target="_blank">Send Message</a></p>
+                            <a href="https://api.whatsapp.com/send?phone=+15612719502" target="_blank">Send Message</a>
+                            <span>Instant Support</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Property Location</h4>
+                            <span>Kanjikuzhi, Kottayam, Kerala</span>
+                            <span>Premium Location</span>
                         </div>
                     </div>
                 </div>
                 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" required>
-                            <label for="name">Full Name</label>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-header">
+                            <h3>Send Us a Message</h3>
+                            <p>Fill out the form below and we'll get back to you shortly</p>
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" required>
-                            <label for="email">Email Address</label>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Full Name *</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email Address *</label>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="tel" id="phone" name="phone" required>
-                            <label for="phone">Phone Number</label>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" required>
+                                <label for="phone">Phone Number *</label>
+                            </div>
+                            <div class="form-group">
+                                <select id="interest" name="interest" required>
+                                    <option value="">Select Interest</option>
+                                    <option value="viewing">Property Viewing</option>
+                                    <option value="pricing">Pricing Details</option>
+                                    <option value="loan">Loan Assistance</option>
+                                    <option value="investment">Investment Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <label for="interest">Interest Type</label>
+                            </div>
                         </div>
+                        
                         <div class="form-group">
-                            <select id="interest" name="interest" required>
-                                <option value="">Select Interest</option>
-                                <option value="viewing">Property Viewing</option>
-                                <option value="pricing">Pricing Details</option>
-                                <option value="loan">Loan Assistance</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <label for="interest">Interest</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                            <label for="message">Your Message *</label>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                        <label for="message">Your Message</label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">
-                        <span>Send Message</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-brand">
-                        <img src="images/flat.png" alt="Logo">
-                        <h3>Chandy's Tall County</h3>
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-brand">
+                            <img src="images/flat.png" alt="Logo">
+                            <div class="brand-info">
+                                <h3>Chandy's Tall County</h3>
+                                <span>Luxury Living Redefined</span>
+                            </div>
+                        </div>
+                        <p>Experience the pinnacle of luxury living in Kottayam's most prestigious residential complex with world-class amenities and stunning skyline views.</p>
+                        <div class="social-links">
+                            <a href="https://api.whatsapp.com/send?phone=+15612719502" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="tel:+15612719502">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                            <a href="mailto:contact@homeforsalekottayam.com">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
                     </div>
-                    <p>Experience luxury living in Kottayam's most prestigious residential complex with world-class amenities and stunning skyline views.</p>
-                    <div class="social-links">
-                        <a href="https://api.whatsapp.com/send?phone=+15612719502" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="tel:+15612719502"><i class="fas fa-phone"></i></a>
-                        <a href="mailto:contact@homeforsalekottayam.com"><i class="fas fa-envelope"></i></a>
+                    
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Property</a></li>
+                            <li><a href="#features">Key Features</a></li>
+                            <li><a href="#floor-plan">Floor Plans</a></li>
+                            <li><a href="#amenities">Amenities</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
                     </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#floor-plan">Floor Plan</a></li>
-                        <li><a href="#amenities">Amenities</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Property Details</h4>
-                    <ul>
-                        <li>2 Bedrooms, 2 Bathrooms</li>
-                        <li>1425 Sq Ft Living Space</li>
-                        <li>18th Floor Premium Unit</li>
-                        <li>Ready to Move</li>
-                        <li>Covered Parking</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Kanjikuzhi, Kottayam, Kerala</li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+15612719502">+1 561 271 9502</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@homeforsalekottayam.com">contact@homeforsalekottayam.com</a></li>
-                    </ul>
+                    
+                    <div class="footer-section">
+                        <h4>Property Details</h4>
+                        <ul>
+                            <li>2 Bedrooms, 2 Bathrooms</li>
+                            <li>1425 Sq Ft Living Space</li>
+                            <li>18th Floor Premium Unit</li>
+                            <li>Ready to Move Property</li>
+                            <li>Covered Parking Space</li>
+                            <li>24/7 Security & Power Backup</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Contact Information</h4>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kanjikuzhi, Kottayam, Kerala, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+15612719502">+1 561 271 9502</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contact@homeforsalekottayam.com">contact@homeforsalekottayam.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://api.whatsapp.com/send?phone=+15612719502" target="_blank">WhatsApp Support</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Chandy's Tall County. All rights reserved. | Premium Luxury Apartments in Kottayam</p>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Chandy's Tall County. All rights reserved. Premium Luxury Apartments in Kottayam.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -601,7 +770,10 @@
     <!-- WhatsApp Float Button -->
     <a href="https://api.whatsapp.com/send?phone=+15612719502" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip">Chat with us</span>
+        <div class="whatsapp-tooltip">
+            <span>Need Help?</span>
+            <small>Chat with us on WhatsApp</small>
+        </div>
     </a>
 
     <!-- Scripts -->

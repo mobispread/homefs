@@ -2,10 +2,12 @@
 // Preloader
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
-    preloader.style.opacity = '0';
-    setTimeout(() => {
-        preloader.style.display = 'none';
-    }, 500);
+    if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }
 });
 
 // Navigation functionality
@@ -34,10 +36,10 @@ class Navigation {
             
             // Add/remove scrolled class
             if (scrollTop > 100) {
-                this.header.style.background = 'rgba(15, 15, 15, 0.98)';
+                this.header.style.background = 'rgba(10, 10, 10, 0.98)';
                 this.header.style.backdropFilter = 'blur(30px)';
             } else {
-                this.header.style.background = 'rgba(15, 15, 15, 0.95)';
+                this.header.style.background = 'rgba(10, 10, 10, 0.95)';
                 this.header.style.backdropFilter = 'blur(20px)';
             }
             
@@ -53,6 +55,8 @@ class Navigation {
     }
     
     setupMobileMenu() {
+        if (!this.hamburger || !this.navMenu) return;
+        
         this.hamburger.addEventListener('click', () => {
             this.navMenu.classList.toggle('active');
             this.hamburger.classList.toggle('active');
@@ -63,25 +67,41 @@ class Navigation {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                document.body.style.overflow = 'hidden';
             } else {
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
                 spans[2].style.transform = 'none';
+                document.body.style.overflow = '';
             }
         });
         
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!this.header.contains(e.target)) {
-                this.navMenu.classList.remove('active');
-                this.hamburger.classList.remove('active');
-                
-                const spans = this.hamburger.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+                this.closeMenu();
             }
         });
+        
+        // Close menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.closeMenu();
+            }
+        });
+    }
+    
+    closeMenu() {
+        if (!this.navMenu || !this.hamburger) return;
+        
+        this.navMenu.classList.remove('active');
+        this.hamburger.classList.remove('active');
+        
+        const spans = this.hamburger.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+        document.body.style.overflow = '';
     }
     
     setupActiveLinks() {
@@ -92,7 +112,7 @@ class Navigation {
             
             sections.forEach(section => {
                 const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
+                const sectionTop = section.offsetTop - 150;
                 const sectionId = section.getAttribute('id');
                 const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
                 
@@ -122,19 +142,101 @@ class Navigation {
                 }
                 
                 // Close mobile menu
-                this.navMenu.classList.remove('active');
-                this.hamburger.classList.remove('active');
-                
-                const spans = this.hamburger.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+                this.closeMenu();
             });
         });
     }
 }
 
-// Image Modal
+// Hero Slider functionality
+class HeroSlider {
+    constructor() {
+        this.slides = document.querySelectorAll('.hero-slide');
+        this.currentSlide = 0;
+        this.slideInterval = null;
+        
+        this.init();
+    }
+    
+    init() {
+        if (this.slides.length > 1) {
+            this.startSlider();
+        }
+    }
+    
+    startSlider() {
+        this.slideInterval = setInterval(() => {
+            this.nextSlide();
+        }, 6000);
+    }
+    
+    nextSlide() {
+        this.slides[this.currentSlide].classList.remove('active');
+        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+        this.slides[this.currentSlide].classList.add('active');
+    }
+    
+    stopSlider() {
+        if (this.slideInterval) {
+            clearInterval(this.slideInterval);
+        }
+    }
+}
+
+// Gallery Filter functionality
+class GalleryFilter {
+    constructor() {
+        this.filterButtons = document.querySelectorAll('.filter-btn');
+        this.galleryItems = document.querySelectorAll('.gallery-item');
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupFilters();
+    }
+    
+    setupFilters() {
+        this.filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                
+                // Update active button
+                this.filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter items
+                this.filterItems(filter);
+            });
+        });
+    }
+    
+    filterItems(filter) {
+        this.galleryItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            
+            if (filter === 'all' || category === filter) {
+                item.style.display = 'block';
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+}
+
+// Image Modal functionality
 class ImageModal {
     constructor() {
         this.modal = document.getElementById('imageModal');
@@ -145,10 +247,13 @@ class ImageModal {
     }
     
     init() {
+        if (!this.modal) return;
         this.setupCloseEvents();
     }
     
     open(imageSrc) {
+        if (!this.modal || !this.modalImage) return;
+        
         this.modalImage.src = imageSrc;
         this.modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -160,6 +265,8 @@ class ImageModal {
     }
     
     close() {
+        if (!this.modal) return;
+        
         this.modal.style.opacity = '0';
         document.body.style.overflow = '';
         
@@ -169,13 +276,17 @@ class ImageModal {
     }
     
     setupCloseEvents() {
-        this.modalClose.addEventListener('click', () => this.close());
+        if (this.modalClose) {
+            this.modalClose.addEventListener('click', () => this.close());
+        }
         
-        this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
-                this.close();
-            }
-        });
+        if (this.modal) {
+            this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) {
+                    this.close();
+                }
+            });
+        }
         
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -185,7 +296,7 @@ class ImageModal {
     }
 }
 
-// Contact Form
+// Contact Form functionality
 class ContactForm {
     constructor() {
         this.form = document.getElementById('contactForm');
@@ -195,7 +306,61 @@ class ContactForm {
     init() {
         if (this.form) {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+            this.setupFormValidation();
         }
+    }
+    
+    setupFormValidation() {
+        const inputs = this.form.querySelectorAll('input, textarea, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                this.validateField(input);
+            });
+            
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    this.validateField(input);
+                }
+            });
+        });
+    }
+    
+    validateField(field) {
+        const value = field.value.trim();
+        let isValid = true;
+        
+        // Required field validation
+        if (field.hasAttribute('required') && !value) {
+            isValid = false;
+        }
+        
+        // Email validation
+        if (field.type === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                isValid = false;
+            }
+        }
+        
+        // Phone validation
+        if (field.type === 'tel' && value) {
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
+                isValid = false;
+            }
+        }
+        
+        // Update field appearance
+        if (isValid) {
+            field.classList.remove('error');
+            field.style.borderColor = '#333333';
+        } else {
+            field.classList.add('error');
+            field.style.borderColor = '#e74c3c';
+        }
+        
+        return isValid;
     }
     
     handleSubmit(e) {
@@ -208,30 +373,57 @@ class ContactForm {
         const interest = formData.get('interest');
         const message = formData.get('message');
         
-        // Basic validation
-        if (!name || !email || !phone || !message) {
-            this.showNotification('Please fill in all required fields.', 'error');
+        // Validate all fields
+        const inputs = this.form.querySelectorAll('input[required], textarea[required], select[required]');
+        let isFormValid = true;
+        
+        inputs.forEach(input => {
+            if (!this.validateField(input)) {
+                isFormValid = false;
+            }
+        });
+        
+        if (!isFormValid) {
+            this.showNotification('Please fill in all required fields correctly.', 'error');
             return;
         }
+        
+        // Show loading state
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
         
         // Create WhatsApp message
         const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AInterest: ${interest}%0AMessage: ${message}`;
         const whatsappUrl = `https://api.whatsapp.com/send?phone=+15612719502&text=${whatsappMessage}`;
         
-        // Open WhatsApp
-        window.open(whatsappUrl, '_blank');
-        
-        // Show success message
-        this.showNotification('Redirecting to WhatsApp...', 'success');
-        
-        // Reset form
-        this.form.reset();
+        // Simulate sending delay
+        setTimeout(() => {
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            this.showNotification('Redirecting to WhatsApp...', 'success');
+            
+            // Reset form
+            this.form.reset();
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 1000);
     }
     
     showNotification(message, type) {
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
-        notification.textContent = message;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `;
         
         // Style the notification
         notification.style.cssText = `
@@ -246,8 +438,14 @@ class ContactForm {
             transform: translateX(100%);
             transition: transform 0.3s ease;
             font-family: var(--font-primary);
-            ${type === 'success' ? 'background: linear-gradient(135deg, #10b981, #059669);' : 'background: linear-gradient(135deg, #ef4444, #dc2626);'}
+            ${type === 'success' ? 
+                'background: linear-gradient(135deg, #10b981, #059669);' : 
+                'background: linear-gradient(135deg, #ef4444, #dc2626);'
+            }
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         `;
         
         document.body.appendChild(notification);
@@ -257,7 +455,7 @@ class ContactForm {
             notification.style.transform = 'translateX(0)';
         });
         
-        // Remove after 3 seconds
+        // Remove after 4 seconds
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => {
@@ -265,14 +463,14 @@ class ContactForm {
                     document.body.removeChild(notification);
                 }
             }, 300);
-        }, 3000);
+        }, 4000);
     }
 }
 
 // Scroll animations
 class ScrollAnimations {
     constructor() {
-        this.elements = document.querySelectorAll('.feature-card, .amenity-card, .gallery-item, .contact-card, .info-item');
+        this.elements = document.querySelectorAll('.feature-card, .amenity-item, .gallery-item, .contact-card, .info-card, .stat-item');
         this.init();
     }
     
@@ -315,9 +513,9 @@ class ParallaxEffect {
         if (this.hero && window.innerWidth > 768) {
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
-                const parallax = scrolled * 0.2;
+                const parallax = scrolled * 0.3;
                 
-                const heroVideo = this.hero.querySelector('.hero-video');
+                const heroVideo = this.hero.querySelector('.hero-bg');
                 if (heroVideo) {
                     heroVideo.style.transform = `translateY(${parallax}px)`;
                 }
@@ -326,7 +524,7 @@ class ParallaxEffect {
     }
 }
 
-// Enhanced hover effects with mobile support
+// Smooth hover effects
 class HoverEffects {
     constructor() {
         this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -343,25 +541,13 @@ class HoverEffects {
     
     setupHoverEffects() {
         // Card hover effects for non-touch devices
-        const cards = document.querySelectorAll('.feature-card, .amenity-card, .contact-card, .info-item');
+        const cards = document.querySelectorAll('.feature-card, .amenity-item, .contact-card, .info-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-        
-        // Button hover effects
-        const buttons = document.querySelectorAll('.btn');
-        buttons.forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
             });
         });
@@ -395,34 +581,95 @@ class HoverEffects {
                 this.style.transform = 'scale(1)';
             });
         });
-        
-        // Gallery items always show overlay on touch devices
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        galleryItems.forEach(item => {
-            const overlay = item.querySelector('.gallery-overlay');
-            if (overlay) {
-                overlay.style.transform = 'translateY(0)';
-                overlay.style.opacity = '0.9';
+    }
+}
+
+// Form enhancements
+class FormEnhancements {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupLabelAnimations();
+        this.setupSelectStyling();
+    }
+    
+    setupLabelAnimations() {
+        const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+            
+            // Check if input has value on load
+            if (input.value) {
+                input.parentElement.classList.add('focused');
             }
         });
-        
-        // Plan overlay always visible on touch devices
-        const planImage = document.querySelector('.plan-image');
-        if (planImage) {
-            const planOverlay = planImage.querySelector('.plan-overlay');
-            if (planOverlay) {
-                planOverlay.style.opacity = '1';
-            }
+    }
+    
+    setupSelectStyling() {
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', function() {
+                if (this.value) {
+                    this.parentElement.classList.add('focused');
+                } else {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    }
+}
+
+// Performance optimizations
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+// Lazy loading for images
+class LazyLoader {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        if ('IntersectionObserver' in window) {
+            this.setupImageObserver();
         }
+    }
+    
+    setupImageObserver() {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                }
+            });
+        });
         
-        // About image overlay always visible on touch devices
-        const aboutImage = document.querySelector('.about-image');
-        if (aboutImage) {
-            const imageOverlay = aboutImage.querySelector('.image-overlay');
-            if (imageOverlay) {
-                imageOverlay.style.opacity = '1';
-            }
-        }
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => imageObserver.observe(img));
     }
 }
 
@@ -433,7 +680,7 @@ function openModal(imageSrc) {
     }
 }
 
-// Page loading effect
+// Page loading animation
 class PageLoader {
     constructor() {
         this.init();
@@ -444,9 +691,9 @@ class PageLoader {
         window.addEventListener('load', () => {
             document.body.style.opacity = '1';
             
-            // Animate elements in sequence
-            const elements = document.querySelectorAll('.hero-info > *');
-            elements.forEach((el, index) => {
+            // Animate hero elements in sequence
+            const heroElements = document.querySelectorAll('.hero-text > *');
+            heroElements.forEach((el, index) => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
                 
@@ -454,30 +701,35 @@ class PageLoader {
                     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
-                }, index * 100);
+                }, index * 150);
+            });
+            
+            // Animate stats
+            const statItems = document.querySelectorAll('.stat-item');
+            statItems.forEach((stat, index) => {
+                stat.style.opacity = '0';
+                stat.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    stat.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    stat.style.opacity = '1';
+                    stat.style.transform = 'translateY(0)';
+                }, 500 + (index * 100));
             });
         });
     }
 }
 
 // Mobile viewport handler
-class MobileViewport {
+class MobileHandler {
     constructor() {
         this.init();
     }
     
     init() {
-        // Set viewport meta tag for proper mobile scaling
         this.setViewport();
-        
-        // Handle orientation changes
         this.handleOrientationChange();
-        
-        // Prevent zoom on double tap for specific elements
-        this.preventDoubleTabZoom();
-        
-        // Handle safe area for devices with notches
-        this.handleSafeArea();
+        this.optimizeTouch();
     }
     
     setViewport() {
@@ -492,134 +744,44 @@ class MobileViewport {
     
     handleOrientationChange() {
         window.addEventListener('orientationchange', () => {
-            // Delay to allow the orientation change to complete
             setTimeout(() => {
                 window.scrollTo(0, 0);
-                
-                // Recalculate hero height if needed
-                const hero = document.querySelector('.hero');
-                if (hero && window.innerHeight < 500) {
-                    hero.style.minHeight = '100vh';
-                }
             }, 100);
         });
     }
     
-    preventDoubleTabZoom() {
-        const elements = document.querySelectorAll('.btn, .nav-link, .gallery-btn');
-        elements.forEach(element => {
+    optimizeTouch() {
+        // Improve touch performance
+        const touchElements = document.querySelectorAll('.btn, .nav-link, .gallery-btn, .whatsapp-btn');
+        touchElements.forEach(element => {
+            element.style.touchAction = 'manipulation';
+        });
+        
+        // Prevent zoom on double tap for buttons
+        touchElements.forEach(element => {
             element.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 element.click();
             });
         });
     }
-    
-    handleSafeArea() {
-        // Add CSS custom properties for safe area
-        const root = document.documentElement;
-        root.style.setProperty('--safe-area-inset-top', 'env(safe-area-inset-top)');
-        root.style.setProperty('--safe-area-inset-bottom', 'env(safe-area-inset-bottom)');
-        root.style.setProperty('--safe-area-inset-left', 'env(safe-area-inset-left)');
-        root.style.setProperty('--safe-area-inset-right', 'env(safe-area-inset-right)');
-    }
-}
-
-// Touch gesture handler
-class TouchHandler {
-    constructor() {
-        this.init();
-    }
-    
-    init() {
-        // Improve scroll performance on mobile
-        this.optimizeScrolling();
-        
-        // Handle touch gestures for gallery
-        this.setupGalleryGestures();
-        
-        // Improve tap performance
-        this.optimizeTapping();
-    }
-    
-    optimizeScrolling() {
-        // Use passive event listeners for better performance
-        document.addEventListener('touchstart', () => {}, { passive: true });
-        document.addEventListener('touchmove', () => {}, { passive: true });
-        
-        // Prevent overscroll on body
-        document.body.addEventListener('touchmove', (e) => {
-            if (e.target === document.body) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-    }
-    
-    setupGalleryGestures() {
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        galleryItems.forEach(item => {
-            let touchStartTime = 0;
-            
-            item.addEventListener('touchstart', (e) => {
-                touchStartTime = Date.now();
-            });
-            
-            item.addEventListener('touchend', (e) => {
-                const touchDuration = Date.now() - touchStartTime;
-                
-                // If touch duration is less than 200ms, treat as tap
-                if (touchDuration < 200) {
-                    const img = item.querySelector('img');
-                    if (img && window.imageModal) {
-                        window.imageModal.open(img.src);
-                    }
-                }
-            });
-        });
-    }
-    
-    optimizeTapping() {
-        // Remove 300ms tap delay on mobile
-        const fastClickElements = document.querySelectorAll('.btn, .nav-link, .gallery-btn, .whatsapp-btn');
-        fastClickElements.forEach(element => {
-            element.style.touchAction = 'manipulation';
-        });
-    }
 }
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize mobile-specific components first
-    const mobileViewport = new MobileViewport();
-    const touchHandler = new TouchHandler();
-    
-    // Initialize components
+    // Initialize all components
     const navigation = new Navigation();
+    const heroSlider = new HeroSlider();
+    const galleryFilter = new GalleryFilter();
     window.imageModal = new ImageModal();
     const contactForm = new ContactForm();
     const scrollAnimations = new ScrollAnimations();
     const parallax = new ParallaxEffect();
     const hoverEffects = new HoverEffects();
+    const formEnhancements = new FormEnhancements();
+    const lazyLoader = new LazyLoader();
     const pageLoader = new PageLoader();
-    
-    // Form enhancements
-    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
-    formInputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-        
-        input.addEventListener('blur', function() {
-            if (!this.value) {
-                this.parentElement.classList.remove('focused');
-            }
-        });
-        
-        // Check if input has value on load
-        if (input.value) {
-            input.parentElement.classList.add('focused');
-        }
-    });
+    const mobileHandler = new MobileHandler();
     
     // Smooth scroll for all anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -638,78 +800,60 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
-
-// Performance optimizations
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
-
-// Lazy loading for images
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
+    
+    // Add loading animation to buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (!this.classList.contains('btn-loading')) {
+                this.classList.add('btn-loading');
+                setTimeout(() => {
+                    this.classList.remove('btn-loading');
+                }, 2000);
             }
         });
     });
-    
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    lazyImages.forEach(img => imageObserver.observe(img));
-}
-
-// Add custom cursor effect for interactive elements
-document.addEventListener('mousemove', (e) => {
-    const cursor = document.querySelector('.custom-cursor');
-    if (cursor) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    }
 });
 
-// Handle form validation
-const validateForm = (form) => {
-    const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-    let isValid = true;
+// Add custom styles for loading states
+const style = document.createElement('style');
+style.textContent = `
+    .btn-loading {
+        opacity: 0.7;
+        pointer-events: none;
+    }
     
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            input.style.borderColor = '#ef4444';
-            isValid = false;
-        } else {
-            input.style.borderColor = '#333333';
-        }
-    });
+    .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
     
-    return isValid;
-};
-
-// Add loading states
-const addLoadingState = (button) => {
-    const originalText = button.innerHTML;
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-    button.disabled = true;
+    .form-group.focused label {
+        top: -12px;
+        left: 1rem;
+        font-size: 0.875rem;
+        color: var(--primary-color);
+        background: var(--bg-card);
+        padding: 0 0.5rem;
+    }
     
-    setTimeout(() => {
-        button.innerHTML = originalText;
-        button.disabled = false;
-    }, 2000);
-};
+    .form-group input.error,
+    .form-group textarea.error,
+    .form-group select.error {
+        border-color: #e74c3c;
+    }
+`;
+document.head.appendChild(style);
 
 // Initialize theme
-document.documentElement.style.setProperty('--primary-color', '#c9a961');
-document.documentElement.style.setProperty('--dark-bg', '#0f0f0f');
+document.documentElement.style.setProperty('--primary-color', '#b8860b');
+document.documentElement.style.setProperty('--bg-primary', '#0a0a0a');
+
+// Add performance monitoring
+if ('performance' in window) {
+    window.addEventListener('load', () => {
+        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+        console.log(`Page loaded in ${loadTime}ms`);
+    });
+}
