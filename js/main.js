@@ -685,6 +685,24 @@ function openModal(imageSrc) {
     }
 }
 
+function scrollToInteriorGallery() {
+    // First set gallery filter to show interior items
+    const interiorFilterBtn = document.querySelector('.filter-btn[data-filter="interior"]');
+    if (interiorFilterBtn) {
+        interiorFilterBtn.click();
+    }
+    
+    // Then scroll to gallery section
+    const gallerySection = document.getElementById('gallery');
+    if (gallerySection) {
+        const offsetTop = gallerySection.offsetTop - 80;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    }
+}
+
 // Page loading animation
 class PageLoader {
     constructor() {
