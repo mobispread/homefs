@@ -564,7 +564,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     grid-template-columns: 2fr 1fr;
     gap: var(--space-3xl);
     align-items: center;
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .video-container {
@@ -743,7 +743,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 /* Section Styles */
 .section-header {
     text-align: center;
-    margin-bottom: var(--space-3xl);
+    margin-bottom: var(--space-xl);
 }
 
 .section-subtitle {
@@ -784,7 +784,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
     align-items: center;
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .text-content h3 {
@@ -907,7 +907,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-xl);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .feature-card {
@@ -982,7 +982,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
     align-items: center;
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .plan-details {
@@ -1081,8 +1081,8 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     background: var(--bg-secondary);
 }
 
-..amenities-content {
-    margin-top: var(--space-xl);
+.amenities-content {
+    margin-top: var(--space-md);
 }
 
 .amenities-grid {
@@ -1166,7 +1166,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 }
 
 .gallery-content {
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .gallery-filters {
@@ -1302,7 +1302,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
 }
 
 .contact-info {
