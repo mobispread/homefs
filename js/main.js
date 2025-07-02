@@ -701,6 +701,17 @@ function scrollToInteriorGallery() {
     }
 }
 
+function scrollToAmenities() {
+    const amenitiesSection = document.querySelector('#amenities');
+    if (amenitiesSection) {
+        const offsetTop = amenitiesSection.offsetTop - 80;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    }
+}
+
 // Page loading animation
 class PageLoader {
     constructor() {
