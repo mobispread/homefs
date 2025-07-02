@@ -1424,6 +1424,23 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     background: var(--bg-secondary);
 }
 
+#contactMsgSubmit {
+    margin: var(--space-md) 0;
+    padding: var(--space-sm);
+    text-align: center;
+    border-radius: var(--radius-md);
+}
+
+.text-success {
+    color: #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.text-danger {
+    color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
 .form-group label {
     position: absolute;
     top: var(--space-md);

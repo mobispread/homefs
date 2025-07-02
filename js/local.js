@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 
     var isMobile = {
@@ -86,7 +85,7 @@ $(document).ready(function(){
 
     function contactFormSuccess() {
         $("#contactForm")[0].reset();
-        contactSubmitMSG(true, "");
+        contactSubmitMSG(true, "Thank you! Your message has been sent successfully.");
         $("input").removeClass('notEmpty'); // resets the field label after submission
         $("textarea").removeClass('notEmpty'); // resets the field label after submission
     }
