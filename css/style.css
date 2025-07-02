@@ -453,12 +453,12 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     backdrop-filter: blur(10px);
-    color: var(--text-secondary);
+    color: #000;
     font-size: 0.875rem;
 }
 
 .feature-badge i {
-    color: var(--primary-color);
+    color: #000;
 }
 
 .feature-badge.price-feature {
