@@ -45,7 +45,7 @@ $(document).ready(function(){
             contactSubmitMSG(false, "Please fill all fields!");
         } else {
            event.preventDefault();
-           contactSubmitForm(fullname, phone, email, message);
+           contactSubmitForm();
         }
         console.log("Submit");
         //return false;
@@ -55,7 +55,7 @@ $(document).ready(function(){
         // initiate variables with form content
        var url = window.location.href;
        console.log("Submit Contact via POST");
-       var name = $("#fullname").val();
+       var name = $("#name").val();
         var email = $("#email").val();
         var phone = $("#phone").val();
        var message = $("#message").val();
