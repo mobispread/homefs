@@ -394,30 +394,28 @@ class ContactForm {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
         
-        // Create WhatsApp message
-        const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Message: ${message}`;
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=15612719502&text=${encodeURIComponent(whatsappMessage)}`;
-        
-        // Simulate sending delay
-        setTimeout(() => {
-            // Open WhatsApp
-            window.open(whatsappUrl, '_blank');
-            
-            // Show success message
-            this.showNotification('Redirecting to WhatsApp...', 'success');
-            
-            // Reset form
-            this.form.reset();
-            
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }, 1000);
+        // Submit to API
+        const url = window.location.href;
+        $.ajax({
+            type: "POST",
+            url: "https://us-central1-mobispread.cloudfunctions.net/contact",
+            data: "name=" + name + "&email=" + email + "&phone=" + phone + "&message=" + message + "&product=chandys" + "&url=" + url,
+            success: (data) => {
+                if (data.success == true) {
+                    this.showNotification('Thank you! Your message has been sent successfully.', 'success');
+                    this.form.reset();
+                } else {
+                    this.showNotification(data.message || 'Error sending message. Please try again.', 'error');
+                }
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            },
+            error: (data) => {
+                this.showNotification('Error sending message. Please try again.', 'error');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
     }
     
     showNotification(message, type) {

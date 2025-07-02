@@ -225,23 +225,24 @@ class ContactForm {
             return;
         }
         
-        // Create WhatsApp message
-        const whatsappMessage = `Hello! I'm interested in Chandy's Tall County apartment.
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Message: ${message}`;
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=15612719502&text=${encodeURIComponent(whatsappMessage)}`;
-        
-        // Open WhatsApp
-        window.open(whatsappUrl, '_blank');
-        
-        // Show success message
-        this.showNotification('Redirecting to WhatsApp...', 'success');
-        
-        // Reset form
-        this.form.reset();
+        // Submit to API
+        const url = window.location.href;
+        $.ajax({
+            type: "POST",
+            url: "https://us-central1-mobispread.cloudfunctions.net/contact",
+            data: "name=" + name + "&email=" + email + "&phone=" + phone + "&message=" + message + "&product=chandys" + "&url=" + url,
+            success: (data) => {
+                if (data.success == true) {
+                    this.showNotification('Thank you! Your message has been sent successfully.', 'success');
+                    this.form.reset();
+                } else {
+                    this.showNotification(data.message || 'Error sending message. Please try again.', 'error');
+                }
+            },
+            error: (data) => {
+                this.showNotification('Error sending message. Please try again.', 'error');
+            }
+        });
     }
     
     showNotification(message, type) {
