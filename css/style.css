@@ -461,6 +461,34 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     color: var(--primary-color);
 }
 
+.feature-badge.price-feature {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: 1px solid var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.feature-badge.price-feature i {
+    color: white;
+}
+
+.feature-badge.ready-feature {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: 1px solid #28a745;
+    color: white;
+    font-weight: 600;
+}
+
+.feature-badge.ready-feature i {
+    color: white;
+}
+
+.feature-badge.price-feature:hover,
+.feature-badge.ready-feature:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
 .hero-actions {
     display: flex;
     gap: var(--space-md);
