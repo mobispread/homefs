@@ -1,4 +1,3 @@
-
 // Modern JavaScript for Chandy's Tall County Website
 
 // Initialize AOS (Animate On Scroll)
@@ -18,47 +17,47 @@ class Navbar {
         this.navToggle = document.getElementById('nav-toggle');
         this.navMenu = document.getElementById('nav-menu');
         this.navLinks = document.querySelectorAll('.nav-link');
-        
+
         this.init();
     }
-    
+
     init() {
         this.setupScrollEffect();
         this.setupMobileMenu();
         this.setupActiveLinks();
         this.setupSmoothScroll();
     }
-    
+
     setupScrollEffect() {
         let lastScrollTop = 0;
-        
+
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
+
             // Add/remove scrolled class
             if (scrollTop > 100) {
                 this.navbar.classList.add('scrolled');
             } else {
                 this.navbar.classList.remove('scrolled');
             }
-            
+
             // Hide/show navbar on scroll
             if (scrollTop > lastScrollTop && scrollTop > 200) {
                 this.navbar.style.transform = 'translateY(-100%)';
             } else {
                 this.navbar.style.transform = 'translateY(0)';
             }
-            
+
             lastScrollTop = scrollTop;
         });
     }
-    
+
     setupMobileMenu() {
         this.navToggle.addEventListener('click', () => {
             this.navMenu.classList.toggle('active');
             this.navToggle.classList.toggle('active');
         });
-        
+
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!this.navbar.contains(e.target)) {
@@ -67,19 +66,19 @@ class Navbar {
             }
         });
     }
-    
+
     setupActiveLinks() {
         const sections = document.querySelectorAll('section[id]');
-        
+
         window.addEventListener('scroll', () => {
             const scrollY = window.pageYOffset;
-            
+
             sections.forEach(section => {
                 const sectionHeight = section.offsetHeight;
                 const sectionTop = section.offsetTop - 100;
                 const sectionId = section.getAttribute('id');
                 const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-                
+
                 if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                     this.navLinks.forEach(link => link.classList.remove('active'));
                     if (correspondingLink) {
@@ -89,14 +88,14 @@ class Navbar {
             });
         });
     }
-    
+
     setupSmoothScroll() {
         this.navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                
+
                 if (targetSection) {
                     const offsetTop = targetSection.offsetTop - 80;
                     window.scrollTo({
@@ -104,7 +103,7 @@ class Navbar {
                         behavior: 'smooth'
                     });
                 }
-                
+
                 // Close mobile menu
                 this.navMenu.classList.remove('active');
                 this.navToggle.classList.remove('active');
@@ -119,43 +118,43 @@ class Lightbox {
         this.lightbox = document.getElementById('lightbox');
         this.lightboxImage = document.getElementById('lightbox-image');
         this.lightboxClose = document.querySelector('.lightbox-close');
-        
+
         this.init();
     }
-    
+
     init() {
         this.setupCloseEvents();
     }
-    
+
     open(imageSrc) {
         this.lightboxImage.src = imageSrc;
         this.lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        
+
         // Animate in
         requestAnimationFrame(() => {
             this.lightbox.style.opacity = '1';
         });
     }
-    
+
     close() {
         this.lightbox.style.opacity = '0';
         document.body.style.overflow = '';
-        
+
         setTimeout(() => {
             this.lightbox.style.display = 'none';
         }, 300);
     }
-    
+
     setupCloseEvents() {
         this.lightboxClose.addEventListener('click', () => this.close());
-        
+
         this.lightbox.addEventListener('click', (e) => {
             if (e.target === this.lightbox) {
                 this.close();
             }
         });
-        
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.close();
@@ -170,22 +169,22 @@ class FAQAccordion {
         this.faqItems = document.querySelectorAll('.faq-item');
         this.init();
     }
-    
+
     init() {
         this.faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             const answer = item.querySelector('.faq-answer');
-            
+
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                
+
                 // Close all other items
                 this.faqItems.forEach(otherItem => {
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
                 });
-                
+
                 // Toggle current item
                 if (isActive) {
                     item.classList.remove('active');
@@ -203,28 +202,28 @@ class ContactForm {
         this.form = document.getElementById('contact-form');
         this.init();
     }
-    
+
     init() {
         if (this.form) {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
         }
     }
-    
+
     handleSubmit(e) {
         e.preventDefault();
-        
+
         const formData = new FormData(this.form);
         const name = formData.get('name') || document.getElementById('name').value;
         const email = formData.get('email') || document.getElementById('email').value;
         const phone = formData.get('phone') || document.getElementById('phone').value;
         const message = formData.get('message') || document.getElementById('message').value;
-        
+
         // Basic validation
         if (!name || !email || !phone || !message) {
             this.showNotification('Please fill in all fields.', 'error');
             return;
         }
-        
+
         // Submit to API
         const url = window.location.href;
         $.ajax({
@@ -244,12 +243,12 @@ class ContactForm {
             }
         });
     }
-    
+
     showNotification(message, type) {
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
         notification.textContent = message;
-        
+
         // Style the notification
         notification.style.cssText = `
             position: fixed;
@@ -264,14 +263,14 @@ class ContactForm {
             transition: transform 0.3s ease;
             ${type === 'success' ? 'background: #10b981;' : 'background: #ef4444;'}
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Animate in
         requestAnimationFrame(() => {
             notification.style.transform = 'translateX(0)';
         });
-        
+
         // Remove after 3 seconds
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
@@ -288,17 +287,17 @@ class ScrollAnimations {
         this.elements = document.querySelectorAll('[data-scroll]');
         this.init();
     }
-    
+
     init() {
         this.setupIntersectionObserver();
     }
-    
+
     setupIntersectionObserver() {
         const options = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -306,7 +305,7 @@ class ScrollAnimations {
                 }
             });
         }, options);
-        
+
         this.elements.forEach(el => observer.observe(el));
     }
 }
@@ -317,13 +316,13 @@ class ParallaxEffect {
         this.hero = document.querySelector('.hero');
         this.init();
     }
-    
+
     init() {
         if (this.hero) {
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
                 const parallax = scrolled * 0.5;
-                
+
                 this.hero.style.transform = `translateY(${parallax}px)`;
             });
         }
@@ -336,7 +335,7 @@ class CounterAnimation {
         this.counters = document.querySelectorAll('[data-counter]');
         this.init();
     }
-    
+
     init() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -346,20 +345,20 @@ class CounterAnimation {
                 }
             });
         });
-        
+
         this.counters.forEach(counter => observer.observe(counter));
     }
-    
+
     animateCounter(element) {
         const target = parseInt(element.getAttribute('data-counter'));
         const duration = 2000;
         const step = target / (duration / 16);
         let current = 0;
-        
+
         const timer = setInterval(() => {
             current += step;
             element.textContent = Math.floor(current);
-            
+
             if (current >= target) {
                 element.textContent = target;
                 clearInterval(timer);
@@ -375,6 +374,34 @@ function openLightbox(imageSrc) {
     }
 }
 
+function scrollToInteriorGallery() {
+    const interiorGallery = document.querySelector('.gallery');
+    if (interiorGallery) {
+        interiorGallery.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+
+        // Activate interior filter after scrolling
+        setTimeout(() => {
+            const interiorBtn = document.querySelector('.filter-btn[data-filter="interior"]');
+            if (interiorBtn) {
+                interiorBtn.click();
+            }
+        }, 800);
+    }
+}
+
+function scrollToAmenities() {
+    const amenitiesSection = document.querySelector('#amenities');
+    if (amenitiesSection) {
+        amenitiesSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize components
@@ -385,11 +412,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollAnimations = new ScrollAnimations();
     const parallax = new ParallaxEffect();
     const counters = new CounterAnimation();
-    
+
     // Loading animation
     const loader = document.querySelector('.loader');
     const overlayer = document.querySelector('#overlayer');
-    
+
     if (loader && overlayer) {
         window.addEventListener('load', () => {
             overlayer.style.opacity = '0';
@@ -398,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         });
     }
-    
+
     // Smooth reveal on page load
     document.body.style.opacity = '0';
     window.addEventListener('load', () => {
@@ -432,7 +459,7 @@ if ('IntersectionObserver' in window) {
             }
         });
     });
-    
+
     const lazyImages = document.querySelectorAll('img[data-src]');
     lazyImages.forEach(img => imageObserver.observe(img));
 }
@@ -447,7 +474,7 @@ const addScrollAnimation = (selector, animationClass) => {
             }
         });
     }, { threshold: 0.1 });
-    
+
     elements.forEach(el => observer.observe(el));
 };
 
