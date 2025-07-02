@@ -29,13 +29,12 @@ $(document).ready(function(){
             element.scrollIntoView();
       });
 
+    // WhatsApp links now work on both mobile and desktop
     $('a[href^="https://api.whatsapp.com"]').on('click', function(e){
-        if(!isMobile.any())
-            e.preventDefault();
-            var element = document.querySelector("#contact-section");
-            // scroll to element
-            element.scrollIntoView();
-      });
+        // Allow WhatsApp links to work on all devices
+        // Desktop will open web.whatsapp.com, mobile will open the app
+        return true;
+    });
     /* Phone Form */
     $("#contactForm").validator().on("submit", function(event) {
         if (event.isDefaultPrevented()) {
