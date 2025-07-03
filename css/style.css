@@ -439,10 +439,29 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 .hero-description {
     font-size: 1.125rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-xl);
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
     max-width: 600px;
+}
+
+.property-highlights {
+    margin: var(--space-lg) 0 var(--space-xl) 0;
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.property-description {
+    font-size: 1rem;
     line-height: 1.7;
+    color: var(--text-primary);
+    margin: 0;
+    text-align: justify;
+    font-weight: 400;
 }
 
 .hero-features {
@@ -1005,8 +1024,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 }
 
 .detail-item {
-    display: flex;
-    justify-content: space-between;
+    display: flex;    justify-content: space-between;
     align-items: center;
     padding: var(--space-md);
     background: var(--bg-card);
@@ -1950,81 +1968,6 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
         gap: var(--space-md);
     }
 
-    .footer-bottom-content {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--space-md);
-    }
-
-    .whatsapp-float {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-        bottom: var(--space-md);
-        right: var(--space-md);
-    }
-
-    .whatsapp-tooltip {
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 0.75rem;
-    }
-
-    /* Hero Section Extra Small */
-    .hero-stats {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
-    }
-
-    .stat-item {
-        padding: var(--space-md);
-    }
-
-    .hero-title {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-
-    .hero-description {
-        font-size: 0.9rem;
-    }
-
-    .hero-features {
-        gap: var(--space-xs);
-    }
-
-    .feature-badge {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-    }
-
-    .feature-badge span {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 120px;
-    }
-
-    /* Section Headers */
-    .section-title {
-        font-size: 1.75rem;
-    }
-
-    .section-description {
-        font-size: 0.9rem;
-    }
-
-    /* Grid Adjustments */
-    .info-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-    }
-
     .info-card {
         padding: var(--space-md);
     }
@@ -2094,79 +2037,3 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
         height: 50px;
         font-size: 1.25rem;
     }
-}
-
-/* Scroll Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fade-in-up {
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .hero-bg iframe,
-    .gallery-image img,
-    .media-item img,
-    .plan-image img {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* Focus indicators */
-.btn:focus,
-.nav-link:focus,
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* Selection styling */
-::selection {
-    background: var(--primary-color);
-    color: var(--bg-primary);
-}
-
-::-moz-selection {
-    background: var(--primary-color);
-    color: var(--bg-primary);
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
-}
