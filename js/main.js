@@ -1,12 +1,12 @@
 
-// Preloader
+// Preloader - faster removal
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
         preloader.style.opacity = '0';
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 500);
+        }, 200);
     }
 });
 
@@ -30,8 +30,9 @@ class Navigation {
     
     setupScrollEffect() {
         let lastScrollTop = 0;
+        let ticking = false;
         
-        window.addEventListener('scroll', () => {
+        const updateScrollEffect = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             // Add/remove scrolled class
@@ -51,6 +52,14 @@ class Navigation {
             }
             
             lastScrollTop = scrollTop;
+            ticking = false;
+        };
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffect);
+                ticking = true;
+            }
         });
     }
     
