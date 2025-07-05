@@ -435,6 +435,19 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     margin-bottom: var(--space-md);
     color: var(--text-primary);
     line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.brand-suffix {
+    font-size: 0.35em;
+    font-weight: 500;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: -0.1em;
+    opacity: 0.9;
 }
 
 .hero-description {
