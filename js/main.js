@@ -207,7 +207,8 @@ class GalleryFilter {
     
     setupFilters() {
         this.filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
                 const filter = button.getAttribute('data-filter');
                 
                 // Update active button
@@ -693,13 +694,7 @@ function openModal(imageSrc) {
 }
 
 function scrollToInteriorGallery() {
-    // First set gallery filter to show interior items
-    const interiorFilterBtn = document.querySelector('.filter-btn[data-filter="interior"]');
-    if (interiorFilterBtn) {
-        interiorFilterBtn.click();
-    }
-    
-    // Then scroll to gallery section
+    // First scroll to gallery section
     const gallerySection = document.getElementById('gallery');
     if (gallerySection) {
         const offsetTop = gallerySection.offsetTop - 80;
@@ -707,6 +702,14 @@ function scrollToInteriorGallery() {
             top: offsetTop,
             behavior: 'smooth'
         });
+        
+        // Then set gallery filter to show interior items after scrolling
+        setTimeout(() => {
+            const interiorFilterBtn = document.querySelector('.filter-btn[data-filter="interior"]');
+            if (interiorFilterBtn) {
+                interiorFilterBtn.click();
+            }
+        }, 800);
     }
 }
 
@@ -824,7 +827,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageLoader = new PageLoader();
     const mobileHandler = new MobileHandler();
     
-    // Smooth scroll for all anchor links
+    // Fix all navigation and anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -838,6 +841,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
+                
+                // Close mobile menu if open
+                const navMenu = document.getElementById('nav-menu');
+                const hamburger = document.getElementById('hamburger');
+                if (navMenu && hamburger) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             }
         });
     });
