@@ -486,17 +486,17 @@ class ScrollAnimations {
         this.elements = document.querySelectorAll('.feature-card, .amenity-item, .gallery-item, .contact-card, .info-card, .stat-item');
         this.init();
     }
-    
+
     init() {
         this.setupIntersectionObserver();
     }
-    
+
     setupIntersectionObserver() {
         const options = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -505,7 +505,7 @@ class ScrollAnimations {
                 }
             });
         }, options);
-        
+
         this.elements.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
@@ -843,10 +843,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Close mobile menu if open
                 const navMenu = document.getElementById('nav-menu');
                 const hamburger = document.getElementById('hamburger');
-                if (navMenu && hamburger) {
+                if (navMenu && hamburger && navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     hamburger.classList.remove('active');
                     document.body.style.overflow = '';
+
+                    const spans = hamburger.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
                 }
             }
         });
@@ -860,13 +865,13 @@ style.textContent = `
         opacity: 0.7;
         pointer-events: none;
     }
-    
+
     .notification-content {
         display: flex;
         align-items: center;
         gap: 8px;
     }
-    
+
     .form-group.focused label {
         top: -12px;
         left: 1rem;
@@ -875,7 +880,7 @@ style.textContent = `
         background: var(--bg-card);
         padding: 0 0.5rem;
     }
-    
+
     .form-group input.error,
     .form-group textarea.error,
     .form-group select.error {
