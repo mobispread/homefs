@@ -1,12 +1,12 @@
 
-// Preloader - faster removal
+// Preloader
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
         preloader.style.opacity = '0';
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 200);
+        }, 500);
     }
 });
 
@@ -30,9 +30,8 @@ class Navigation {
     
     setupScrollEffect() {
         let lastScrollTop = 0;
-        let ticking = false;
         
-        const updateScrollEffect = () => {
+        window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             // Add/remove scrolled class
@@ -52,14 +51,6 @@ class Navigation {
             }
             
             lastScrollTop = scrollTop;
-            ticking = false;
-        };
-        
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateScrollEffect);
-                ticking = true;
-            }
         });
     }
     
@@ -207,8 +198,7 @@ class GalleryFilter {
     
     setupFilters() {
         this.filterButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
+            button.addEventListener('click', () => {
                 const filter = button.getAttribute('data-filter');
                 
                 // Update active button
@@ -694,7 +684,13 @@ function openModal(imageSrc) {
 }
 
 function scrollToInteriorGallery() {
-    // First scroll to gallery section
+    // First set gallery filter to show interior items
+    const interiorFilterBtn = document.querySelector('.filter-btn[data-filter="interior"]');
+    if (interiorFilterBtn) {
+        interiorFilterBtn.click();
+    }
+    
+    // Then scroll to gallery section
     const gallerySection = document.getElementById('gallery');
     if (gallerySection) {
         const offsetTop = gallerySection.offsetTop - 80;
@@ -702,14 +698,6 @@ function scrollToInteriorGallery() {
             top: offsetTop,
             behavior: 'smooth'
         });
-        
-        // Then set gallery filter to show interior items after scrolling
-        setTimeout(() => {
-            const interiorFilterBtn = document.querySelector('.filter-btn[data-filter="interior"]');
-            if (interiorFilterBtn) {
-                interiorFilterBtn.click();
-            }
-        }, 800);
     }
 }
 
@@ -827,7 +815,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageLoader = new PageLoader();
     const mobileHandler = new MobileHandler();
     
-    // Fix all navigation and anchor links
+    // Smooth scroll for all anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -841,15 +829,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: offsetTop,
                     behavior: 'smooth'
                 });
-                
-                // Close mobile menu if open
-                const navMenu = document.getElementById('nav-menu');
-                const hamburger = document.getElementById('hamburger');
-                if (navMenu && hamburger) {
-                    navMenu.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
             }
         });
     });
