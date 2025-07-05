@@ -1812,7 +1812,7 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
     /* Hero Section Mobile */
     .hero {
-        padding: 80px 0 40px;
+        padding: 80px 0 20px;
         min-height: 100vh;
     }
 
@@ -1966,6 +1966,11 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
     .whatsapp-tooltip {
         display: none;
+    }
+
+    /* Video Section Mobile */
+    .video-section {
+        padding: var(--space-lg) 0;
     }
 }
 
