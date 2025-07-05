@@ -2149,6 +2149,18 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     }
 }
 
+/* Frame embedding handling */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure proper display when embedded in frames */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
 /* Focus indicators */
 .btn:focus,
 .nav-link:focus,
