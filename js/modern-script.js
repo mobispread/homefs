@@ -1,3 +1,55 @@
+// Lightweight performance-optimized script
+document.addEventListener('DOMContentLoaded', function() {
+    // Simple scroll animations with intersection observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.feature-card, .amenity-item, .gallery-item, .contact-card, .info-card');
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Scroll to functions
+function scrollToInteriorGallery() {
+    const interiorFilterBtn = document.querySelector('.filter-btn[data-filter="interior"]');
+    if (interiorFilterBtn) {
+        interiorFilterBtn.click();
+    }
+
+    const gallerySection = document.getElementById('gallery');
+    if (gallerySection) {
+        gallerySection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+function scrollToAmenities() {
+    const amenitiesSection = document.querySelector('#amenities');
+    if (amenitiesSection) {
+        amenitiesSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
 // Modern JavaScript for Chandy's Tall County Website
 
 // Initialize AOS (Animate On Scroll)
@@ -373,6 +425,8 @@ function openLightbox(imageSrc) {
         window.lightbox.open(imageSrc);
     }
 }
+
+
 
 function scrollToInteriorGallery() {
     const interiorGallery = document.querySelector('.gallery');

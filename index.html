@@ -66,10 +66,15 @@
     }
     </script>
 
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+    <link rel="preload" href="images/chandys-image.jpg" as="image">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -319,7 +324,7 @@
                 <div class="gallery-grid">
                     <div class="gallery-item" data-category="exterior">
                         <div class="gallery-image">
-                            <img src="images/entrance-1.jpg" alt="Property Entrance Driveway">
+                            <img src="images/entrance-1.jpg" alt="Property Entrance Driveway" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4>Entrance Driveway</h4>
@@ -333,7 +338,7 @@
 
                     <div class="gallery-item" data-category="exterior">
                         <div class="gallery-image">
-                            <img src="images/entrance-2.jpg" alt="Modern Entrance Canopy">
+                            <img src="images/entrance-2.jpg" alt="Modern Entrance Canopy" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4>Modern Entrance Canopy</h4>
@@ -347,7 +352,7 @@
 
                     <div class="gallery-item" data-category="exterior">
                         <div class="gallery-image">
-                            <img src="images/entrance-3.jpg" alt="Landscaped Entrance">
+                            <img src="images/entrance-3.jpg" alt="Landscaped Entrance" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4>Landscaped Entrance</h4>
@@ -361,7 +366,7 @@
 
                     <div class="gallery-item" data-category="exterior">
                         <div class="gallery-image">
-                            <img src="images/entrance-4.jpg" alt="Garden View with Building">
+                            <img src="images/entrance-4.jpg" alt="Garden View with Building" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4>Garden View</h4>
@@ -375,7 +380,7 @@
 
                     <div class="gallery-item" data-category="interior">
                         <div class="gallery-image">
-                            <img src="images/entrance-lobby.jpg" alt="Grand Entrance Lobby">
+                            <img src="images/entrance-lobby.jpg" alt="Grand Entrance Lobby" loading="lazy">
                             <div class="gallery-overlay">
                                 <div class="gallery-content">
                                     <h4>Grand Entrance Lobby</h4>
@@ -1211,14 +1216,6 @@
 
     <!-- Scripts -->
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    <script src="js/local.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/modern-script.js"></script>
 </body>
 </html>

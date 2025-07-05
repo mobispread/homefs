@@ -48,9 +48,9 @@
     --space-3xl: 6rem;
 
     /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
 
     /* Border Radius */
     --radius-sm: 4px;
@@ -127,6 +127,17 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Performance optimizations */
+* {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.hero, .gallery-item, .feature-card, .amenity-item {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 /* Buttons */
@@ -388,8 +399,8 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
     ), url('../images/chandys-image.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     z-index: 1;
+    will-change: transform;
 }
 
 .hero-overlay {
